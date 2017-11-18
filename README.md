@@ -12,8 +12,7 @@ COPYING for details.
 FIXME:This file still needs to be expanded. A lot.
 FIXME: sprinkle mentions of IEEE488 where appropiate
 
-Deprecation notices
-===================
+# Deprecation notices
 The following feature(s) will be removed in the next release:
 - M2I support
    M2I support has been redundant since the introduction of transparent
@@ -21,8 +20,8 @@ The following feature(s) will be removed in the next release:
    your files to P00 format (e.g. with m2itopc64.c) and set your device
    to extension mode 2 (XE2).
 
-Introduction:
-=============
+# Introduction
+
 sd2iec is firmware, used in hardware designs like MMC2IEC, SD2IEC, or uIEC,
 that allows the Commodore serial bus to access removable storage devices
 (MMC, SD, CF) - think of it as a 1541 with a modern storage medium instead
@@ -45,8 +44,8 @@ some reason, DO NOT use M-R for this purpose. Use the UI command
 instead and check the message you get for "sd2iec" and "uiec" instead.
 
 
-Supported commands:
-===================
+# Supported commands:
+
 - General notes:
   Any command not listed below is currently not supported.
 
@@ -446,8 +445,8 @@ Supported commands:
   corresponds to any of the known software fastloaders so the correct
   emulation code can be used when M-E is called.
 
-Large buffers:
-==============
+# Large buffers
+
 To support commands which directly access the storage devices support
 for larger buffers was added. A large buffer can be allocated by
 opening a file named "##<d>" (exactly three characters" with <d> replaced
@@ -466,8 +465,8 @@ The B-P command supports a third parameter that holds the high byte
 of the buffer position, For example, "B-P 9 4 1" positions to byte
 260 (1*256+4) of the buffer on secondary address 9.
 
-Long File Names:
-================
+# Long File Names
+
 Long file names (i.e names not within the 8.3 limits) are supported on
 FAT, but for compatibility reasons the 8.3 name is used if the long
 name exceeds 16 characters. If you use anything but ASCII characters
@@ -476,8 +475,8 @@ get strange characters on the other system because the LFN use
 unicode characters on disk, but sd2iec parses only the low byte
 of each character in the name.
 
-EEPROM file system
-==================
+# EEPROM file system
+
 *WARNING*: The EEPROM file system is a newly-implemented file system
 that may still contain bugs. Do not store data on it that you cannot
 affort to lose. Always make sure that you have a backup. Also, the
@@ -514,8 +513,8 @@ stored depends on the length of the files, longer files need more than
 one directory entry.
 
 
-Partitions:
-===========
+# Partitions
+
 sd2iec features a multi-partition support similiar to that of the CMD
 drives. The partitions (which may be on separate drives for some hardware
 configurations) are accessed using the drive number of the commands
@@ -539,8 +538,8 @@ available. Additionally "$!" will always load the directory of the
 EEPROM file system partition (if available), similar to "$1" to "$9"
 for partitions 1 to 9.
 
-Software fastloaders:
-=====================
+# Software fastloaders
+
 Note: Using sd2iec without an external crystal or similiar precise
       clock source is not a supported configuration.
       If you try that anyway, be prepared to suffer from random
@@ -548,28 +547,28 @@ Note: Using sd2iec without an external crystal or similiar precise
       Some fastloader implementations will actively refuse to work
       if you use an unsuitable clock source.
 
-  Turbodisk
-  ---------
+  ## Turbodisk
+
   Turbodisk is detected by the CRC of its 493 byte long floppy code and
   the M-E address 0x0303. The same code seems to be used under various names,
   among them "Turbodisk" (both 2.1 and 2.2) and "Fast-Load".
   It is not known if there is an NTSC-compatible version of this fastloader.
 
-  Final Cartridge III
-  -------------------
+  ## Final Cartridge III
+
   Both the fast loader and the fast saver of Final Cartridge III are supported.
   The FC3 is both PAL and NTSC compatible.
 
   The slightly different fastloader used for files freezed with the FC3
   is also supported.
 
-  EXOS V3 and The Beast System
-  ----------------------------
+  ## EXOS V3 and The Beast System
+
   Both supported, the loader used by these kernals is very similiar to
   the FC3 fast loader.
 
-  Action Replay 6
-  ---------------
+  ## Action Replay 6
+
   The AR6 reads a byte from the drive rom to check which fastloader it should
   use. When file-based M-R emulation is disabled sd2iec returns a value that
   should force the cartridge to use the standard kernal loader instead of its
@@ -580,8 +579,8 @@ Note: Using sd2iec without an external crystal or similiar precise
   Currently the only recognized AR6 fastloader and fastsaver are the
   ones for the 1581.
 
-  Dreamload
-  ---------
+  ## Dreamload
+
   Dreamload uses direct track/sector access, so it is only supported
   on D64 or similiar disk image formats. As sd2iec has to wait for commands
   from the C64 constantly the disk change buttons may become unresponsive,
@@ -593,8 +592,8 @@ Note: Using sd2iec without an external crystal or similiar precise
   Please note that Dreamload does not work with more than one device on the
   serial bus due to the way it uses the ATN line.
 
-  ULoad Model 3
-  -------------
+  ## ULoad Model 3
+
   ULoad Model 3 uses direct track/sector access, so it is only supported
   on D64 or similiar disk image formats. Currently there is exactly one
   supported variant of ULoad Model 3, which is the one used by
@@ -606,8 +605,8 @@ Note: Using sd2iec without an external crystal or similiar precise
   contact me so we can work out a way to trigger ULoad M3 support
   without uploading any drive code at all.
 
-  G.I. Joe Loader
-  ---------------
+  ## G.I. Joe Loader
+
   Said to be the most-ripped IRQ loader. Unfortunately this is a
   "captive" fastloader similiar to dreamload (but not restricted
   to disk images because it is file name-based) and there is no
@@ -616,13 +615,13 @@ Note: Using sd2iec without an external crystal or similiar precise
   the disk change button until the red LED turns on, just like
   sleep mode.
 
-  Epyx FastLoad Cartridge
-  -----------------------
+  ## Epyx FastLoad Cartridge
+
   ONLY the fast loader from this cartridge is supported, no
   disk editor/copier/whatever functions.
 
-  GEOS
-  ----
+  ## GEOS
+
   GEOS 2.0 can be booted from D64 images made from original disks
   as well as D41/71/81 images created using geoMakeBoot (make sure to
   Configure the system for a 1541/1571/1581 before using geoMakeBoot).
@@ -641,8 +640,8 @@ Note: Using sd2iec without an external crystal or similiar precise
   type that is selected in GEOS would support (i.e. D64 for a 1541,
   D64/D71 for a 1571 and D81 for a 1581).
 
-  Wheels
-  ------
+  ## Wheels
+
   Wheels can be booted from any disk image type it supports. The correct
   rom emulation file (XR) MUST be set, especially for CMD HD emulation.
 
@@ -651,13 +650,13 @@ Note: Using sd2iec without an external crystal or similiar precise
   For other drive types the restrictions on disk image type of GEOS also
   apply to Wheels.
 
-  ELoad Version 1
-  ---------------
+  ## ELoad Version 1
+
   This loader was made for EasyProg but may also be used in other programs.
   It detects and supports the sd2iec natively.
 
-  Maniac Mansion
-  --------------
+  ## Maniac Mansion
+
   Original versions of Maniac Mansion have an additional copy protection
   check that is not supported by sd2iec. Please use a cracked version
   instead - the ones from Gamebase 64 seem to work. Please remember to
@@ -668,18 +667,18 @@ Note: Using sd2iec without an external crystal or similiar precise
   should exit automatically - to resume normal operation, you need to
   hold down the NEXT button until the red LED turns on.
 
-  Zak McKracken
-  -------------
+  ## Zak McKracken
+
   Same as Maniac Mansion, but this game only has a code list protection,
   so images of original disks should work fine.
 
-JiffyDOS:
-=========
+# JiffyDOS
+
 The JiffyDOS protocol has very relaxed timing constraints compared to
 Turbodisk, but still not as relaxed as the standard Commodore IEC protocol.
 
-x00 files:
-==========
+# x00 files
+
 P00/S00/U00/R00 files are transparently supported, that means they show
 up in the directory listing with their internal file name instead of the
 FAT file name. Renaming them only changes the internal name. The XE
@@ -690,8 +689,8 @@ Parsing of x00 files is always enabled even when writing them is not.
 x00 files are recognized by checking both the extension of the file
 (P/S/U/R with a two-digit suffix) and the header signature.
 
-Disk Images:
-============
+# Disk Images
+
 Disk images are recognized by their file extension (.D64, .D41, .D71, .D81,
 .DNP) and their file size (must be one of 174848, 175531, 349696, 351062,
 819200 or a multiple of 65536 for DNP). If the image has an error info block
@@ -710,8 +709,8 @@ subdirectories with this version of DirMaster. It is possible to fix
 this problem using a hex editor, but the exact process is beyond the scope
 of this document.
 
-M2I files:
-==========
+# M2I files
+
 NOTICE: Support for M2I files will be removed in the next release, see
         the deprecation notices at the top of this file for advice.
 
@@ -723,16 +722,16 @@ because calling stat for every file was slowing down the directory listing
 too much. For compatibility with existing M2I files the data files do not
 use P00 headers even when the file type is SEQ or USR.
 
-REL files:
-==========
+# REL files
+
 Partial REL file support is implemented. It should work fine for existing
 files, but creating new files and/or adding records to existing files
 may fail. REL files in disk images are not supported yet, only as files
 on a FAT medium. When x00 support is disabled the first byte of a REL
 file is assumed to be the record length.
 
-Changing Disk Images
-====================
+# Changing Disk Images
+
 Because some programs require more than one disk side there is support
 for changing the currently mounted disk image with two buttons called
 NEXT and PREV connected to the AVR.
@@ -765,8 +764,8 @@ pins of the chip to ground.
 To use this functionality, you can either create a swap list file
 yourself or let sd2iec create one for you.
 
-Creating a swap list
---------------------
+## Creating a swap list
+
 A swap list is a text file with one line per disk image or directory
 you want to be able to change into. You are not limited to using disk
 images, a swap list file may also refer to standard directories on the
@@ -852,8 +851,8 @@ AUTOSWAP.GEN file is created, although the flashing pattern may not be
 very discernible because of the preceding card activity.
 
 
-Sleep Mode:
-===========
+## Sleep Mode
+
 If you hold the disk change button down for two seconds, sd2iec will
 enter "sleep mode". In this mode it doesn't listen to the bus at all
 until you hold down the disk change button for two seconds again
@@ -865,8 +864,8 @@ work with more than one device on the bus.
 While sleep mode is active, the red LED will be on and the green LED
 will be off.
 
-Card detection test:
-====================
+## Card detection test
+
 Because some SD slots seem to suffer from bad/unreliable card detect
 switches a test mode for this has been implemented on the units that
 have SD card support. If you hold down the PREV button during powerup,
@@ -884,8 +883,8 @@ inserted into the slot.
 To exit from the diagnostic mode, power-cycle the device or push the
 NEXT button once.
 
-Other important notes:
-======================
+## Other important notes
+
 - When you hold down the disk change (forward) button during power
   on the software will use default values instead of those stored
   in the EEPROM.
@@ -904,8 +903,8 @@ Other important notes:
   was changed would cause lots of problems if the number of partitions
   on the previous and the newly inserted cards are different.
 
-Compilation notes:
-==================
+## Compilation notes
+
 sd2iec requires avr-libc version 1.6.x.
 
 sd2iec is set up to be compiled in multiple configurations, controlled by
